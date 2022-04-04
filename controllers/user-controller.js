@@ -15,8 +15,8 @@ const userController = {
                 res.status(400).json(err);
             });
     },
-    getUserById({ body }, res) {
-        User.findOne({ _id: body.userId })
+    getUserById({ params }, res) {
+        User.findOne({ _id: params.userId })
             .populate({
                 path: "thoughts",
                 select: "-__v",
@@ -25,7 +25,6 @@ const userController = {
                 path: "friends",
                 select: "-__v",
             })
-            .select("-__v")
             .then((dbUserData) => {
                 //if no pizza is found
                 if (!dbUserData) {
@@ -45,7 +44,7 @@ const userController = {
         User.findOneAndUpdate(
             { _id: params.userId },
             { $push: { friends: params.friendId } },
-            { new: true }
+            { new: true, runValidators: true }
         )
             .then((dbUserData) => {
                 if (!dbUserData) {
@@ -62,7 +61,7 @@ const userController = {
         User.findOneAndUpdate(
             { _id: params.userId },
             { $pull: { friends: params.friendId } },
-            { new: true }
+            { new: true, runValidators: true }
         )
             .then((dbUserData) => {
                 if (!dbUserData) {
@@ -76,8 +75,11 @@ const userController = {
                 res.json(err);
             });
     },
-    updateUser({ body }, res) {
-        User.findOneAndUpdate({ _id: body.userId }, body, { new: true })
+    updateUser({ params, body }, res) {
+        User.findOneAndUpdate({ _id: params.userId }, body, {
+            new: true,
+            runValidators: true,
+        })
             .then((dbUserData) => {
                 if (!dbUserData) {
                     return res.status(404).json({
@@ -90,8 +92,8 @@ const userController = {
                 res.json(err);
             });
     },
-    deleteUser({ body }, res) {
-        User.findOneAndDelete({ _id: body.userId })
+    deleteUser({ params }, res) {
+        User.findOneAndDelete({ _id: params.userId })
             .then((dbUserData) => {
                 if (!dbUserData) {
                     res.status(404).json({
@@ -106,8 +108,3 @@ const userController = {
 };
 
 module.exports = userController;
-
-// .populate({
-//     path: "thoughts",
-//     select: "-__v",
-// })
