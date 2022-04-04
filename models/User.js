@@ -39,6 +39,13 @@ UserSchema.virtual("friendCount").get(function () {
     return this.friends.length;
 });
 
+UserSchema.virtual("friendList", {
+    ref: "User",
+    localField: "_id",
+    foreignField: "friends",
+    // justOne: false,
+});
+
 const User = model("User", UserSchema);
 
 module.exports = User;
