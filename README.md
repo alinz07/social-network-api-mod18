@@ -4,7 +4,7 @@
 
 ## **Link** to GitHub repo: https://github.com/alinz07/social-network-api-mod18
 
-## **Link** to walkthrough video:
+## **Link** to walkthrough video: https://drive.google.com/file/d/1qvxU37q3wXo9vkj3m-a2_r5kiCMnKOXa/view
 
 <br/>
 
@@ -34,7 +34,9 @@ MongoDB is a popular choice for social networks because of it's speed with large
 ## **Things I learned**
 
 -   The model.populate method doesn't work when you use model.findOne using info from the body, I needed to use params. Not sure if it's a synchronous issue or something inherent to mongoose. I was confused about the endpoints for my routes when accessing document Ids. For example with an endpoint /api/users/:userId and then using params to findOne user vs /api/users and passing a body to findOne user with a username or id in the body.
-    <br/>
+-   I also appreciated learning more about the day.js package to format my thought and reaction dates.
+
+<br/>
 
 ## **What makes this project stand out?**
 
