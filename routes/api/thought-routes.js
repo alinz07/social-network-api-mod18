@@ -3,13 +3,15 @@ const router = require("express").Router();
 const {
     createThought,
     getAllThoughts,
+    getThought,
     deleteThought,
 } = require("../../controllers/thought-controller");
 
-router.route("/").get(getAllThoughts);
-
-router.route("/:userId").post(createThought);
-
-router.route("/:thoughtId/:userId").delete(deleteThought);
+router
+    .route("/")
+    .get(getAllThoughts)
+    .get(getThought)
+    .delete(deleteThought)
+    .post(createThought);
 
 module.exports = router;
